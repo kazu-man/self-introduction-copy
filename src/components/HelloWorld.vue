@@ -1,4 +1,6 @@
 <template>
+  <Header :headerOption="headerOption" />
+  <button @click="changeTarget">change target</button>
   <div class="hello">
     <h1>{{ msg }}</h1>
     <p>
@@ -87,10 +89,33 @@
 </template>
 
 <script>
+import { ref } from "@vue/reactivity";
+import Header from "./Header";
+
 export default {
   name: "HelloWorld",
+  components: { Header },
   props: {
     msg: String,
+  },
+  setup() {
+    const headerOption = ref({
+      color: "red",
+      list: ["HOME", "ABOUT", "SKILL", "WORK", "CONTACT"],
+      target: 0,
+    });
+
+    const changeTarget = () => {
+      headerOption.value.target =
+        headerOption.value.target < headerOption.value.list.length - 1
+          ? headerOption.value.target + 1
+          : 0;
+    };
+
+    return {
+      headerOption,
+      changeTarget,
+    };
   },
 };
 </script>
