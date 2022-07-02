@@ -16,8 +16,19 @@
             <img :src="data.image" style="width: 75%" />
           </Slide>
         </Carousel>
-        <button @click="prevCarousel">prev</button>
-        <button @click="nextCarousel">next</button>
+        <div class="i-love-area">I LOVE SOMETHING</div>
+        <div class="arrows">
+          <font-awesome-icon
+            icon="arrow-left"
+            class="slider-arrow"
+            @click="prevCarousel"
+          />
+          <font-awesome-icon
+            icon="arrow-right"
+            class="slider-arrow"
+            @click="nextCarousel"
+          />
+        </div>
       </div>
       <div class="about-text">
         Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sint saepe
@@ -81,10 +92,32 @@ export default {
   font-family: "Pacifico", cursive;
 }
 .about-slide {
-  height: 300px;
+  margin-bottom: 10px;
 }
 .about-text {
   height: auto;
-  padding: 20px 0;
+  padding: 10px 0;
+}
+.slider-arrow {
+  color: #fff;
+  font-size: 3em;
+  opacity: 0.7;
+  margin: 0.2rem;
+  cursor: pointer;
+  -webkit-transition: opacity 0.5s;
+  transition: opacity 0.5s;
+}
+.arrows {
+  font-size: 0.6rem;
+  margin-top: 5px;
+}
+.i-love-area {
+  text-align: center;
+  font-size: 1.5em;
+  color: #fff;
+  text-transform: uppercase;
+  font-family: "Oswald", Calibri;
+  font-weight: bold;
+  margin-top: 5px;
 }
 </style>
