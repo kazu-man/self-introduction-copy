@@ -6,10 +6,11 @@ import {
   faLeaf,
   faArrowLeft,
   faArrowRight,
+  faEnvelope,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
-library.add(faLeaf, faArrowLeft, faArrowRight);
+library.add(faLeaf, faArrowLeft, faArrowRight, faEnvelope);
 
 var app = createApp(App);
 //コンポーネントの追加
