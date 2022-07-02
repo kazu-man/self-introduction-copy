@@ -14,6 +14,8 @@ export default {
 </script>
 
 <style>
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@500&family=Pacifico&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@500&family=Oswald:wght@200&family=Pacifico&display=swap");
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -24,5 +26,8 @@ export default {
 
 body {
   margin: 0;
+}
+html {
+  font-size: 100%;
 }
 </style>

@@ -23,7 +23,6 @@
       </div>
     </div>
   </div>
-  <div id="header-dummy"></div>
 </template>
 
 <script>
@@ -44,17 +43,13 @@ export default {
 </script>
 
 <style>
-#header,
-#header-dummy {
-  width: 100%;
-}
 #header {
   width: 100%;
   padding: 10px 0;
   display: flex;
   justify-content: space-around;
   overflow: hidden;
-  position: sticky;
+  position: fixed;
   top: 0;
 }
 
