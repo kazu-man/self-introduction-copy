@@ -11,7 +11,7 @@ import { ref } from "@vue/reactivity";
 import Header from "./Header";
 import Home from "./Home";
 import About from "./About";
-import MySkill from "./MySkill";
+import MySkill from "./myskills/MySkill";
 
 export default {
   name: "HelloWorld",

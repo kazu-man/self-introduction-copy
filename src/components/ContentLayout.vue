@@ -25,7 +25,7 @@ export default {
   width: 100%;
   height: auto;
   background: rgb(200, 193, 236);
-  padding-top: 20px;
+  padding: 20px 0;
 }
 .title {
   font-family: "Pacifico", cursive;
