@@ -1,11 +1,20 @@
 <template>
-  <Header :headerOption="headerOption" />
-  <!-- <button @click="changeTarget">change target</button> -->
-  <Home />
-  <About />
-  <MySkill />
-  <Work />
-  <Contact />
+  <Header :headerOption="headerOption" @clickHeaderOption="scrollContentTo" />
+  <div ref="homeComponent">
+    <Home />
+  </div>
+  <div ref="aboutComponent">
+    <About />
+  </div>
+  <div ref="mySkillComponent">
+    <MySkill />
+  </div>
+  <div ref="workComponent">
+    <Work />
+  </div>
+  <div ref="contactComponent">
+    <Contact />
+  </div>
 </template>
 
 <script>
@@ -21,22 +30,67 @@ export default {
   name: "HelloWorld",
   components: { Header, Home, About, MySkill, Work, Contact },
   setup() {
+    const homeComponent = ref(null);
+    const aboutComponent = ref(null);
+    const mySkillComponent = ref(null);
+    const workComponent = ref(null);
+    const contactComponent = ref(null);
+
     const headerOption = ref({
       color: "red",
-      list: ["HOME", "ABOUT", "SKILL", "WORK", "CONTACT"],
-      target: 0,
+      list: [
+        {
+          name: "HOME",
+          component: homeComponent,
+        },
+        {
+          name: "ABOUT",
+          component: aboutComponent,
+        },
+        {
+          name: "SKILL",
+          component: mySkillComponent,
+        },
+        {
+          name: "WORK",
+          component: workComponent,
+        },
+        {
+          name: "CONTACT",
+          component: contactComponent,
+        },
+      ],
+      target: "HOME",
     });
 
-    // const changeTarget = () => {
-    //   headerOption.value.target =
-    //     headerOption.value.target < headerOption.value.list.length - 1
-    //       ? headerOption.value.target + 1
-    //       : 0;
-    // };
+    const handleScroll = () => {
+      headerOption.value.list.forEach((list, index) => {
+        if (
+          list.component.getBoundingClientRect().top <
+          window.innerHeight - 300
+        ) {
+          headerOption.value.target = headerOption.value.list[index].name;
+        }
+      });
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    const scrollContentTo = (option) => {
+      option.component.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    };
 
     return {
       headerOption,
-      // changeTarget,
+      homeComponent,
+      aboutComponent,
+      mySkillComponent,
+      workComponent,
+      contactComponent,
+      scrollContentTo,
     };
   },
 };

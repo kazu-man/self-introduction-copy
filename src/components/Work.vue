@@ -6,7 +6,7 @@
           @before-enter="imagesBeforeEnter"
           @enter="imagesEnter"
           appear
-          v-if="show"
+          v-show="show"
         >
           <div
             v-for="(work, index) in works"

@@ -6,27 +6,28 @@
         v-for="(option, key) in headerOption.list"
         :key="key"
         :style="{ animationDelay: key * 100 + 'ms' }"
+        @click="clickHeaderOption(option)"
       >
         <transition-group name="border" appear>
           <div
             class="border-dummy-top"
-            v-if="headerOption.target === key"
+            v-if="headerOption.target === option.name"
           ></div>
           <div
             class="border-dummy-right"
-            v-if="headerOption.target === key"
+            v-if="headerOption.target === option.name"
           ></div>
           <div
             class="border-dummy-left"
-            v-if="headerOption.target === key"
+            v-if="headerOption.target === option.name"
           ></div>
           <div
             class="border-dummy-bottom"
-            v-if="headerOption.target === key"
+            v-if="headerOption.target === option.name"
           ></div>
         </transition-group>
         <div class="item">
-          {{ option }}
+          {{ option.name }}
         </div>
       </div>
     </div>
@@ -34,17 +35,18 @@
 </template>
 
 <script>
-import { ref } from "@vue/reactivity";
 export default {
   props: ["headerOption"],
-  setup(props) {
-    const test = ref("test -tate a-sdf-asdf asfsdf");
-    const test2 = ref(2);
-    console.log(props);
+  emits: ["clickHeaderOption"],
+
+  setup(props, context) {
+    const clickHeaderOption = (val) => {
+      console.log(val);
+      context.emit("clickHeaderOption", val);
+    };
 
     return {
-      test,
-      test2,
+      clickHeaderOption,
     };
   },
 };
