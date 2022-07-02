@@ -17,7 +17,7 @@ export default {
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@500&family=Pacifico&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@500&family=Oswald:wght@200&family=Pacifico&display=swap");
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  /* font-family: Avenir, Helvetica, Arial, sans-serif; */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
@@ -29,5 +29,6 @@ body {
 }
 html {
   font-size: 100%;
+  font-family: "Oswald", Calibri;
 }
 </style>

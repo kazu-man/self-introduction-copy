@@ -31,12 +31,13 @@
         </div>
       </div>
       <div class="about-text">
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sint saepe
-        ipsum maxime corrupti? Voluptatum consequuntur voluptate quibusdam, qui
-        quam eligendi odio tenetur non perspiciatis veritatis ad quia dolore,
-        harum ullam! Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-        Excepturi enim dicta est voluptatem? Quis, earum, vel laudantium quos
-        dolores repellendus illo nostrum mollitia, asperiores repellat
+        Hi I am a web developer & designer based in Vancouver in Canada. I
+        believe working in a multi-disciplined approach brings creative
+        inspiration to my work. I am passionate about creating websites and web
+        apps that incorporate interactive design and modern technologies. I
+        specialize in front-end development but also love experimenting with new
+        backend technologies, with the aim to improve productivity, quality,
+        performance and speed.
       </div>
     </div>
   </ContentLayout>
@@ -90,6 +91,7 @@ export default {
 }
 .about-title {
   font-family: "Pacifico", cursive;
+  font-size: 2rem;
 }
 .about-slide {
   margin-bottom: 10px;
@@ -97,6 +99,12 @@ export default {
 .about-text {
   height: auto;
   padding: 10px 0;
+  width: 50%;
+  max-width: 500px;
+  margin: auto;
+  font-size: 1.8rem;
+  color: white;
+  font-weight: bold;
 }
 .slider-arrow {
   color: #fff;
@@ -113,11 +121,10 @@ export default {
 }
 .i-love-area {
   text-align: center;
-  font-size: 1.5em;
+  font-size: 3em;
   color: #fff;
   text-transform: uppercase;
-  font-family: "Oswald", Calibri;
   font-weight: bold;
-  margin-top: 5px;
+  margin-top: 20px;
 }
 </style>

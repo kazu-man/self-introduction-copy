@@ -1,25 +1,33 @@
 <template>
   <div id="header" style="background: rgba(255, 0, 0, 0.3)">
-    <div
-      class="header-content border"
-      v-for="(option, key) in headerOption.list"
-      :key="key"
-      :style="{ animationDelay: key * 100 + 'ms' }"
-    >
-      <transition-group name="border" appear>
-        <div class="border-dummy-top" v-if="headerOption.target === key"></div>
-        <div
-          class="border-dummy-right"
-          v-if="headerOption.target === key"
-        ></div>
-        <div class="border-dummy-left" v-if="headerOption.target === key"></div>
-        <div
-          class="border-dummy-bottom"
-          v-if="headerOption.target === key"
-        ></div>
-      </transition-group>
-      <div class="item">
-        {{ option }}
+    <div class="header-content-wrapper">
+      <div
+        class="header-content border"
+        v-for="(option, key) in headerOption.list"
+        :key="key"
+        :style="{ animationDelay: key * 100 + 'ms' }"
+      >
+        <transition-group name="border" appear>
+          <div
+            class="border-dummy-top"
+            v-if="headerOption.target === key"
+          ></div>
+          <div
+            class="border-dummy-right"
+            v-if="headerOption.target === key"
+          ></div>
+          <div
+            class="border-dummy-left"
+            v-if="headerOption.target === key"
+          ></div>
+          <div
+            class="border-dummy-bottom"
+            v-if="headerOption.target === key"
+          ></div>
+        </transition-group>
+        <div class="item">
+          {{ option }}
+        </div>
       </div>
     </div>
   </div>
@@ -46,24 +54,30 @@ export default {
 #header {
   width: 100%;
   padding: 10px 0;
-  display: flex;
-  justify-content: space-around;
   overflow: hidden;
   position: fixed;
   top: 0;
+  z-index: 999;
+}
+.header-content-wrapper {
+  display: flex;
+  justify-content: space-around;
+  width: 80%;
+  max-width: 550px;
+  margin: auto;
 }
 
 .header-content {
   position: relative;
   display: inline-block;
-  margin: 5px;
   animation: content-in 0.8s cubic-bezier(0.22, 0.15, 0.25, 1.43) 0s backwards;
   color: white;
   text-align: center;
   overflow: hidden;
 }
 .item {
-  margin: 20px;
+  margin: 10px;
+  font-weight: bold;
 }
 
 @keyframes content-in {
@@ -94,13 +108,13 @@ export default {
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 1px;
+  height: 2px;
 }
 /* 右のボーダー */
 .border-dummy-right {
   bottom: 0;
   right: 0;
-  width: 1px;
+  width: 2px;
   height: 100%;
 }
 /* 上のボーダー */
@@ -108,13 +122,13 @@ export default {
   top: 0;
   right: 0;
   width: 100%;
-  height: 1px;
+  height: 2px;
 }
 /* 左のボーダー */
 .border-dummy-left {
   top: 0;
   left: 0;
-  width: 1px;
+  width: 2px;
   height: 100%;
 }
 
@@ -123,7 +137,7 @@ export default {
 .border-leave-to.border-dummy-right {
   bottom: 0;
   right: 0;
-  width: 1px;
+  width: 2px;
   height: 100%;
 }
 .border-enter-active.border-dummy-right {

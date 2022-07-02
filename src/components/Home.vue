@@ -36,10 +36,11 @@ export default {
   font-family: "Pacifico", cursive;
 }
 .my-name h2 {
-  font-size: 1.5rem;
+  font-size: 4rem;
+  margin-bottom: 0;
 }
 .sub-title {
-  font-size: 1.2rem;
+  font-size: 2rem;
   font-family: "Oswald", sans-serif;
   font-weight: bold;
   text-transform: uppercase;
