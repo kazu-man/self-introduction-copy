@@ -4,6 +4,7 @@
   <Home />
   <About />
   <MySkill />
+  <Work />
 </template>
 
 <script>
@@ -12,10 +13,11 @@ import Header from "./Header";
 import Home from "./Home";
 import About from "./About";
 import MySkill from "./myskills/MySkill";
+import Work from "./Work";
 
 export default {
   name: "HelloWorld",
-  components: { Header, Home, About, MySkill },
+  components: { Header, Home, About, MySkill, Work },
   setup() {
     const headerOption = ref({
       color: "red",
