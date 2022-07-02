@@ -3,7 +3,7 @@
     <div class="skill-wrapper" id="skill-wrapper" ref="skillWrapper">
       <div class="center-line"></div>
       <div class="backend">
-        <div @click="show = !show">BACKEND SKILLS</div>
+        <div class="bar-title">BACKEND SKILLS</div>
         <SkillBar
           v-for="(skill, index) in backend"
           :key="index"
@@ -13,7 +13,7 @@
         />
       </div>
       <div class="frontend">
-        <div>FRONTEND SKILLS</div>
+        <div class="bar-title">FRONTEND SKILLS</div>
         <SkillBar
           v-for="(skill, index) in frontend"
           :key="index"
@@ -125,8 +125,9 @@ export default {
   margin-left: -3px;
   background: #fff;
 }
-.backend {
-}
-.frontend {
+.bar-title {
+  color: white;
+  font-size: 2rem;
+  font-weight: bold;
 }
 </style>

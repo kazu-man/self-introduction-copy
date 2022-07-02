@@ -12,13 +12,22 @@
           :style="{ width: skill.value + '%' }"
         ></div>
       </transition>
+      <div
+        class="bar-parcentage"
+        :class="{ left: direction === 'left', right: direction === 'right' }"
+      >
+        <count-up :end-val="skill.value" :duration="3"></count-up>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+import CountUp from "vue-countup-v3";
+
 export default {
   props: ["skill", "direction", "show"],
+  components: { CountUp },
   setup() {},
 };
 </script>
@@ -38,13 +47,14 @@ export default {
   height: 3rem;
   border-radius: 3px;
   overflow: hidden;
+  display: flex;
+  align-items: center;
 }
 .color-bar {
   position: absolute;
   background: #f18276;
   height: 3rem;
   border-radius: 3px;
-  /* width: 80%; */
 }
 .left {
   right: 0;
@@ -71,5 +81,12 @@ export default {
 }
 .right-enter-active {
   transition: all 3s;
+}
+.bar-parcentage {
+  position: absolute;
+  margin: 0 30px;
+  color: white;
+  font-size: 1.5rem;
+  font-weight: bold;
 }
 </style>
