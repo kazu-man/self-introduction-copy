@@ -1,45 +1,41 @@
 <template>
-  <ContentLayout>
-    <div class="about-content">
-      <div class="about-title">
-        <h2>About Me</h2>
-      </div>
-      <div class="about-slide">
-        <Carousel
-          ref="myCarousel"
-          :itemsToShow="3"
-          :wrapAround="true"
-          :autoplay="10000"
-          :touchDrag="false"
-        >
-          <Slide v-for="(data, index) in carouselData" :key="index">
-            <img :src="data.image" style="width: 75%" />
-          </Slide>
-        </Carousel>
-        <div class="i-love-area">I LOVE SOMETHING</div>
-        <div class="arrows">
-          <font-awesome-icon
-            icon="arrow-left"
-            class="slider-arrow"
-            @click="prevCarousel"
-          />
-          <font-awesome-icon
-            icon="arrow-right"
-            class="slider-arrow"
-            @click="nextCarousel"
-          />
-        </div>
-      </div>
-      <div class="about-text">
-        Hi I am a web developer & designer based in Vancouver in Canada. I
-        believe working in a multi-disciplined approach brings creative
-        inspiration to my work. I am passionate about creating websites and web
-        apps that incorporate interactive design and modern technologies. I
-        specialize in front-end development but also love experimenting with new
-        backend technologies, with the aim to improve productivity, quality,
-        performance and speed.
+  <ContentLayout :title="'About me'">
+    <div class="about-slide">
+      <Carousel
+        ref="myCarousel"
+        :itemsToShow="3"
+        :wrapAround="true"
+        :autoplay="10000"
+        :touchDrag="false"
+      >
+        <Slide v-for="(data, index) in carouselData" :key="index">
+          <img :src="data.image" style="width: 75%" />
+        </Slide>
+      </Carousel>
+      <div class="i-love-area">I LOVE SOMETHING</div>
+      <div class="arrows">
+        <font-awesome-icon
+          icon="arrow-left"
+          class="slider-arrow"
+          @click="prevCarousel"
+        />
+        <font-awesome-icon
+          icon="arrow-right"
+          class="slider-arrow"
+          @click="nextCarousel"
+        />
       </div>
     </div>
+    <div class="about-text">
+      Hi I am a web developer & designer based in Vancouver in Canada. I believe
+      working in a multi-disciplined approach brings creative inspiration to my
+      work. I am passionate about creating websites and web apps that
+      incorporate interactive design and modern technologies. I specialize in
+      front-end development but also love experimenting with new backend
+      technologies, with the aim to improve productivity, quality, performance
+      and speed.
+    </div>
+    <!-- </div> -->
   </ContentLayout>
 </template>
 
@@ -83,7 +79,7 @@ export default {
 </script>
 
 <style>
-.about-content {
+/* .about-content {
   width: 100%;
   height: auto;
   background: rgb(200, 193, 236);
@@ -92,7 +88,7 @@ export default {
 .about-title {
   font-family: "Pacifico", cursive;
   font-size: 2rem;
-}
+} */
 .about-slide {
   margin-bottom: 10px;
 }

@@ -1,15 +1,34 @@
 <template>
   <div id="home-wrapper">
-    <slot></slot>
+    <div class="content">
+      <div class="title">
+        <h2>{{ title }}</h2>
+      </div>
+      <slot></slot>
+    </div>
   </div>
 </template>
 
 <script>
-export default {};
+export default {
+  props: {
+    title: String,
+  },
+};
 </script>
 
 <style>
 #home-wrapper {
   width: 100%;
+}
+.content {
+  width: 100%;
+  height: auto;
+  background: rgb(200, 193, 236);
+  padding-top: 20px;
+}
+.title {
+  font-family: "Pacifico", cursive;
+  font-size: 2rem;
 }
 </style>
