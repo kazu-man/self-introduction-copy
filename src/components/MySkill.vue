@@ -1,7 +1,17 @@
-<template></template>
+<template>
+  <ContentLayout :title="'My Skills'"> 
+
+
+    
+  </ContentLayout>
+</template>
 
 <script>
-export default {};
+import ContentLayout from "./ContentLayout";
+
+export default {
+  components: { ContentLayout },
+};
 </script>
 
 <style></style>

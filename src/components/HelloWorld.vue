@@ -3,6 +3,7 @@
   <!-- <button @click="changeTarget">change target</button> -->
   <Home />
   <About />
+  <MySkill />
 </template>
 
 <script>
@@ -10,10 +11,11 @@ import { ref } from "@vue/reactivity";
 import Header from "./Header";
 import Home from "./Home";
 import About from "./About";
+import MySkill from "./MySkill";
 
 export default {
   name: "HelloWorld",
-  components: { Header, Home, About },
+  components: { Header, Home, About, MySkill },
   setup() {
     const headerOption = ref({
       color: "red",
