@@ -28,7 +28,7 @@ body {
   margin: 0;
 }
 html {
-  font-size: 100%;
+  font-size: min(2vw, 18px);
   font-family: "Oswald", Calibri;
 }
 </style>
