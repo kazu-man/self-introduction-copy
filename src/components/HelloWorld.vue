@@ -1,26 +1,38 @@
 <template>
-  <Header :headerOption="headerOption" @clickHeaderOption="scrollContentTo" />
-  <div style="background: white" ref="mainWrapper">
-    <div ref="homeComponent">
-      <Home />
+  <Loading
+    v-if="loading"
+    :loading="loading"
+    @loadingStop="loadingStop"
+  ></Loading>
+  <transition mode="in-out">
+    <div v-show="!loading">
+      <Header
+        :headerOption="headerOption"
+        @clickHeaderOption="scrollContentTo"
+      />
+      <div style="background: white" ref="mainWrapper">
+        <div ref="homeComponent">
+          <Home />
+        </div>
+        <div ref="aboutComponent">
+          <About />
+        </div>
+        <div ref="mySkillComponent">
+          <MySkill />
+        </div>
+        <div ref="workComponent">
+          <Work />
+        </div>
+        <div ref="contactComponent">
+          <Contact />
+        </div>
+      </div>
     </div>
-    <div ref="aboutComponent">
-      <About />
-    </div>
-    <div ref="mySkillComponent">
-      <MySkill />
-    </div>
-    <div ref="workComponent">
-      <Work />
-    </div>
-    <div ref="contactComponent">
-      <Contact />
-    </div>
-  </div>
+  </transition>
 </template>
 
 <script>
-import { ref, onMounted } from "vue";
+import { ref } from "vue";
 import Header from "./Header";
 import Home from "./Home";
 import About from "./About";
@@ -28,10 +40,11 @@ import MySkill from "./myskills/MySkill";
 import Work from "./Work";
 import Contact from "./Contact";
 import gsap from "gsap";
+import Loading from "./Loading";
 
 export default {
   name: "HelloWorld",
-  components: { Header, Home, About, MySkill, Work, Contact },
+  components: { Header, Home, About, MySkill, Work, Contact, Loading },
   setup() {
     const homeComponent = ref(null);
     const aboutComponent = ref(null);
@@ -39,6 +52,7 @@ export default {
     const workComponent = ref(null);
     const contactComponent = ref(null);
     const mainWrapper = ref(null);
+    const loading = ref(true);
 
     const headerOption = ref({
       color: "red",
@@ -80,10 +94,6 @@ export default {
       });
     };
 
-    onMounted(() => {
-      bgChange(headerOption.value.list[0].background);
-    });
-
     const handleScroll = () => {
       headerOption.value.list.forEach((list, index) => {
         if (
@@ -106,6 +116,11 @@ export default {
       });
     };
 
+    const loadingStop = () => {
+      loading.value = false;
+      bgChange(headerOption.value.list[0].background);
+    };
+
     return {
       headerOption,
       homeComponent,
@@ -115,6 +130,8 @@ export default {
       contactComponent,
       scrollContentTo,
       mainWrapper,
+      loading,
+      loadingStop,
     };
   },
 };
@@ -136,4 +153,13 @@ li {
 a {
   color: #42b983;
 }
+/* .v-enter-from {
+  opacity: 0;
+}
+.v-enter-active {
+  transition: all 0.1s;
+}
+.v-enter-to {
+  opacity: 1;
+} */
 </style>
