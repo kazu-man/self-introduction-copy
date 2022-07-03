@@ -16,6 +16,16 @@
               <img :src="work.image" class="work-image" alt="" />
             </a>
           </div>
+          <div
+            v-for="(work, index) in works"
+            :key="work.url"
+            :data-index="index"
+            v-show="!show"
+          >
+            <a :href="work.url" target="_blank">
+              <img :src="work.image" class="work-image dummy" alt="" />
+            </a>
+          </div>
         </transition-group>
       </div>
     </div>
@@ -34,10 +44,10 @@ export default {
     const workWrapper = ref(null);
 
     const handleScroll = () => {
-      if (!show.value) {
-        show.value =
-          workWrapper.value.getBoundingClientRect().top < window.innerHeight;
-      }
+      //   if (!show.value) {
+      show.value =
+        workWrapper.value.getBoundingClientRect().top < window.innerHeight;
+      //   }
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -98,6 +108,9 @@ export default {
 .work-image {
   width: 100%;
   cursor: pointer;
+}
+.work-image.dummy {
+  opacity: 0;
 }
 .image-enter-from {
   opacity: 0;

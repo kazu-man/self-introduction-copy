@@ -76,6 +76,7 @@ export default {
   color: white;
   text-align: center;
   overflow: hidden;
+  cursor: pointer;
 }
 .item {
   margin: 10px;
