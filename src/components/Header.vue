@@ -1,5 +1,5 @@
 <template>
-  <div id="header" style="background: rgba(255, 0, 0, 0.3)">
+  <div id="header">
     <div class="header-content-wrapper">
       <div
         class="header-content border"
@@ -41,7 +41,6 @@ export default {
 
   setup(props, context) {
     const clickHeaderOption = (val) => {
-      console.log(val);
       context.emit("clickHeaderOption", val);
     };
 
@@ -60,6 +59,7 @@ export default {
   position: fixed;
   top: 0;
   z-index: 999;
+  background: rgba(181, 203, 197, 0.6);
 }
 .header-content-wrapper {
   display: flex;

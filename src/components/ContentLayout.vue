@@ -24,7 +24,6 @@ export default {
 .content {
   width: 100%;
   height: auto;
-  background: rgb(200, 193, 236);
   padding: 20px 0;
 }
 .title {

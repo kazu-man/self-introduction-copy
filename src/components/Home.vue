@@ -2,7 +2,6 @@
   <ContentLayout>
     <div class="home-content">
       <div class="home-title">
-        <div class="dummy-bg"></div>
         <div class="my-name">
           <h2>MY NAME</h2>
         </div>
@@ -23,7 +22,6 @@ export default {
 <style>
 .home-content {
   color: white;
-  background: rgb(241, 175, 175);
   height: 100vh;
   display: flex;
   justify-content: center;
@@ -44,14 +42,5 @@ export default {
   font-family: "Oswald", sans-serif;
   font-weight: bold;
   text-transform: uppercase;
-}
-.dummy-bg {
-  width: 100%;
-  height: 100%;
-  background: rgb(241, 175, 175);
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: -1;
 }
 </style>
