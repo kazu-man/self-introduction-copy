@@ -5,13 +5,12 @@
         <transition-group
           @before-enter="imagesBeforeEnter"
           @enter="imagesEnter"
-          appear
-          v-show="show"
         >
           <div
             v-for="(work, index) in works"
             :key="work.url"
             :data-index="index"
+            v-show="show"
           >
             <a :href="work.url" target="_blank">
               <img :src="work.image" class="work-image" alt="" />
@@ -35,8 +34,10 @@ export default {
     const workWrapper = ref(null);
 
     const handleScroll = () => {
-      show.value =
-        workWrapper.value.getBoundingClientRect().top < window.innerHeight;
+      if (!show.value) {
+        show.value =
+          workWrapper.value.getBoundingClientRect().top < window.innerHeight;
+      }
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -73,8 +74,8 @@ export default {
       gsap.to(el, {
         opacity: 1,
         y: 0,
-        duration: 1,
-        delay: 1 + el.dataset.index * 0.2,
+        duration: 0.5,
+        delay: 0.5 + el.dataset.index * 0.2,
         onComplete: done,
       });
     };
