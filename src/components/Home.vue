@@ -1,21 +1,25 @@
 <template>
-  <ContentLayout>
-    <div class="home-content">
-      <div class="home-title">
-        <div class="my-name">
-          <h2>MY NAME</h2>
+  <div>
+    <ParticleBg />
+    <ContentLayout>
+      <div class="home-content">
+        <div class="home-title">
+          <div class="my-name">
+            <h2>MY NAME</h2>
+          </div>
+          <div class="sub-title">WEB DEVELOPER & DESIGNER</div>
         </div>
-        <div class="sub-title">WEB DEVELOPER & DESIGNER</div>
       </div>
-    </div>
-  </ContentLayout>
+    </ContentLayout>
+  </div>
 </template>
 
 <script>
 import ContentLayout from "./ContentLayout";
+import ParticleBg from "./ParticleBg.vue";
 
 export default {
-  components: { ContentLayout },
+  components: { ContentLayout, ParticleBg },
 };
 </script>
 

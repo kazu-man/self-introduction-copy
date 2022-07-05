@@ -100,7 +100,6 @@ export default {
           list.component.getBoundingClientRect().top <
           window.innerHeight - 300
         ) {
-          console.log(headerOption.value.list[index]);
           headerOption.value.target = headerOption.value.list[index].name;
           bgChange(headerOption.value.list[index].background);
         }
