@@ -25,7 +25,6 @@ export default {
     const loaderWrapper = ref(null);
     const loadingActive = ref(true);
     setTimeout(() => {
-      console.log("aaa");
       loadingActive.value = false;
       gsap.to(loaderWrapper.value, {
         x: "80%",
@@ -54,7 +53,7 @@ export default {
 .fullview {
   width: 100%;
   height: 100%;
-  background: rgba(229, 196, 212, 0.84);
+  background: rgba(229, 196, 212, 1);
   position: fixed !important;
   top: 0;
   left: 0;

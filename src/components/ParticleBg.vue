@@ -4,7 +4,7 @@
 
 <script>
 import { ref, onMounted } from "vue";
-import * as THREE from "three"; // } //   WebGLRenderer, //   Scene, //   PerspectiveCamera, //   GridHelper, // , {
+import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 
 export default {
@@ -38,10 +38,11 @@ export default {
     scene.add(group);
     const addMeshToGroup = () => {
       const material = new THREE.MeshBasicMaterial({ color: "#ffffff" });
+      material.transparent = true;
+      material.opacity = 0.6;
       const geometry = new THREE.SphereGeometry(1, 30, 30);
       const mesh = new THREE.Mesh(geometry, material);
       // 配置座標を計算
-      // const radian = (i / 10) * Math.PI * 2;
       const xPosition = (Math.random() - 0.5) * 100;
       const yPosition = (Math.random() - 0.5) * 100;
       const zPosition = (Math.random() - 0.5) * 100;
@@ -52,17 +53,13 @@ export default {
           Math.abs(zPosition) < 20
         )
       ) {
-        mesh.position.set(
-          xPosition, // X座標
-          yPosition, // X座標
-          zPosition // X座標
-        );
+        mesh.position.set(xPosition, yPosition, zPosition);
 
         // グループに追加する
         group.add(mesh);
       }
     };
-    const count = 10;
+    const count = 50;
     for (let i = 0; i < count; i++) {
       // 球体を作成
       addMeshToGroup();
@@ -72,60 +69,30 @@ export default {
       container.value.appendChild(renderer.domElement);
       controls = new OrbitControls(camera, renderer.domElement);
 
-      // scene.add(mesh);
       scene.add(group);
 
       camera.position.z = 20;
 
-      controls.update();
       animate();
     };
     let rot = 0;
+    const timer = setInterval(addMeshToGroup, 2000);
+
     const animate = () => {
       requestAnimationFrame(animate);
-      rot += 0.9; // 毎フレーム角度を0.5度ずつ足していく
+      // 毎フレーム角度を足していく
+      rot += 1;
 
       // // ラジアンに変換する
       const radian = (rot * Math.PI) / 180;
-
-      controls.update();
-
-      group.children.forEach((element) => {
-        element.translateX(Math.random() * 1);
-        element.translateZ(Math.random() * 1);
-
-        // camera.position.x = 50 * Math.sin(radian);
-        // element.translateX(element.position.x * Math.sin(radian) * 0.1);
-        // element.translateZ(element.position.z * Math.cos(radian) * 0.1);
-        // element.translateY(element.position.y * Math.tan(radian) * 0.1);
-        // element.position.x += Math.random();
-        // element.position.y += Math.random();
-        // element.translateX(Math.random() * 0.3);
-        // element.translateY(Math.random() * 0.1);
-        // element.translateZ(Math.random() * 0.1);
-        if (
-          Math.abs(element.position.x) > 60 ||
-          Math.abs(element.position.y) > 60 ||
-          Math.abs(element.position.z) > 60
-        ) {
-          group.remove(element);
-        }
-        if (
-          Math.abs(element.position.x) < 20 &&
-          Math.abs(element.position.y) < 20 &&
-          Math.abs(element.position.z) < 20
-        ) {
-          group.remove(element);
-        }
-      });
-
-      if (group.children.length < 200) {
-        // 球体を作成
-        addMeshToGroup();
+      if (group.children.length > 100) {
+        clearInterval(timer);
       }
 
+      controls.update();
       // // 角度に応じてカメラの位置を設定
       camera.position.x = 50 * Math.sin(radian);
+      camera.position.y = 50 * Math.sin(radian);
       camera.position.z = -50 * Math.cos(radian);
 
       renderer.render(scene, camera);

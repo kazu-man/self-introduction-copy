@@ -4,31 +4,28 @@
     :loading="loading"
     @loadingStop="loadingStop"
   ></Loading>
-  <transition mode="in-out">
-    <div v-show="!loading">
-      <Header
-        :headerOption="headerOption"
-        @clickHeaderOption="scrollContentTo"
-      />
-      <div style="background: white" ref="mainWrapper">
-        <div ref="homeComponent">
-          <Home />
-        </div>
-        <div ref="aboutComponent">
-          <About />
-        </div>
-        <div ref="mySkillComponent">
-          <MySkill />
-        </div>
-        <div ref="workComponent">
-          <Work />
-        </div>
-        <div ref="contactComponent">
-          <Contact />
-        </div>
-      </div>
+  <Header
+    v-else
+    :headerOption="headerOption"
+    @clickHeaderOption="scrollContentTo"
+  />
+  <div style="background: white" ref="mainWrapper">
+    <div ref="homeComponent">
+      <Home />
     </div>
-  </transition>
+    <div ref="aboutComponent">
+      <About />
+    </div>
+    <div ref="mySkillComponent">
+      <MySkill />
+    </div>
+    <div ref="workComponent">
+      <Work />
+    </div>
+    <div ref="contactComponent">
+      <Contact />
+    </div>
+  </div>
 </template>
 
 <script>
