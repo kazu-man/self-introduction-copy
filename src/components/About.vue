@@ -23,7 +23,14 @@
           </transition>
         </Slide>
       </Carousel>
-      <div class="i-love-area">I LOVE SOMETHING</div>
+      <div class="i-love-area">
+        I LOVE
+        {{
+          carouselData[currentSlide.value]
+            ? carouselData[currentSlide.value].message
+            : ""
+        }}
+      </div>
       <div class="arrows">
         <font-awesome-icon
           icon="arrow-left"
@@ -61,11 +68,14 @@ export default {
   components: { ContentLayout, Carousel, Slide, SvgIcon },
   setup() {
     const carouselData = ref([
-      { title: "a", image: "/images/explosion-flame.svg" },
-      { title: "b", image: "/images/tuna.svg" },
-      { title: "c", image: "/images/pig.png" },
-      { title: "c", image: "/images/wolf.svg" },
-      { title: "c", image: "/images/mo-taku-to.svg" },
+      {
+        message: "fire",
+        image: "/images/explosion-flame.svg",
+      },
+      { message: "tuna", image: "/images/tuna.svg" },
+      { message: "pig", image: "/images/pig.png" },
+      { message: "wolf", image: "/images/wolf.svg" },
+      { message: "human", image: "/images/mo-taku-to.svg" },
     ]);
     const myCarousel = ref(null);
 

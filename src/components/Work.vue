@@ -73,6 +73,11 @@ export default {
           "http://manato.ca/assets/dist/img/works/wwm/wwm_thumb.jpg?1494207797",
         url: "http://manato.ca/",
       },
+      {
+        image:
+          "http://manato.ca/assets/dist/img/works/wwm/wwm_thumb.jpg?1494207797",
+        url: "http://manato.ca/",
+      },
     ]);
     const imagesBeforeEnter = (el) => {
       gsap.set(el, {
@@ -120,5 +125,13 @@ export default {
 }
 .image-enter-to {
   opacity: 1;
+}
+
+@media screen and (max-width: 767px) {
+  .image-area {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    margin: 0 5%;
+  }
 }
 </style>
