@@ -9,7 +9,18 @@
         :touchDrag="false"
       >
         <Slide v-for="(data, index) in carouselData" :key="index">
-          <img :src="data.image" style="width: 75%" />
+          <SvgIcon
+            :showIcon="currentSlide.value == index"
+            :targetImageUrl="data.image"
+          />
+          <transition name="explosion" appear>
+            <img
+              v-if="currentSlide.value == index"
+              src="../../public/images/explosion.svg"
+              id="svg"
+              style="width: 80%; position: absolute; opacity: 0"
+            />
+          </transition>
         </Slide>
       </Carousel>
       <div class="i-love-area">I LOVE SOMETHING</div>
@@ -40,24 +51,21 @@
 </template>
 
 <script>
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 import ContentLayout from "./ContentLayout";
 import { Carousel, Slide } from "vue3-carousel";
 import "vue3-carousel/dist/carousel.css";
+import SvgIcon from "./SvgIcon";
 
 export default {
-  components: { ContentLayout, Carousel, Slide },
+  components: { ContentLayout, Carousel, Slide, SvgIcon },
   setup() {
     const carouselData = ref([
-      { title: "a", image: "/images/sample.png" },
-      { title: "b", image: "/images/sample.png" },
-      { title: "c", image: "/images/sample.png" },
-      { title: "c", image: "/images/sample.png" },
-      { title: "c", image: "/images/sample.png" },
-      { title: "c", image: "/images/sample.png" },
-      { title: "c", image: "/images/sample.png" },
-      { title: "c", image: "/images/sample.png" },
-      { title: "c", image: "/images/sample.png" },
+      { title: "a", image: "/images/explosion-flame.svg" },
+      { title: "b", image: "/images/tuna.svg" },
+      { title: "c", image: "/images/pig.png" },
+      { title: "c", image: "/images/wolf.svg" },
+      { title: "c", image: "/images/mo-taku-to.svg" },
     ]);
     const myCarousel = ref(null);
 
@@ -67,28 +75,23 @@ export default {
     const prevCarousel = () => {
       myCarousel.value.prev();
     };
+    let currentSlide = ref(0);
+    onMounted(() => {
+      currentSlide.value = myCarousel.value.data.currentSlide;
+    });
 
     return {
       carouselData,
       nextCarousel,
       myCarousel,
       prevCarousel,
+      currentSlide,
     };
   },
 };
 </script>
 
 <style>
-/* .about-content {
-  width: 100%;
-  height: auto;
-  background: rgb(200, 193, 236);
-  padding-top: 20px;
-}
-.about-title {
-  font-family: "Pacifico", cursive;
-  font-size: 2rem;
-} */
 .about-slide {
   margin-bottom: 10px;
 }
@@ -122,5 +125,39 @@ export default {
   text-transform: uppercase;
   font-weight: bold;
   margin-top: 20px;
+}
+
+.explosion-enter-from {
+  opacity: 0;
+  transform: scale(0.1);
+}
+.explosion-enter-active {
+  animation: explosion 1s ease-in;
+}
+.explosion-enter-to {
+  opacity: 0;
+  transform: scale(0.1);
+  width: 0;
+}
+@keyframes explosion {
+  0% {
+    opacity: 0;
+    transform: scale(0.1);
+  }
+  10% {
+    transform: rotate(0deg);
+    transform: scale(0.8);
+    opacity: 1;
+  }
+
+  95% {
+    transform: rotate(180deg);
+  }
+  99% {
+  }
+  100% {
+    opacity: 0;
+    width: 0;
+  }
 }
 </style>
