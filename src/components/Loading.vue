@@ -1,11 +1,13 @@
 <template>
   <div v-if="loading" class="fullview" ref="loaderWrapper">
-    <vue-element-loading
-      :active="loadingActive"
-      :spinner="'line-scale'"
-      :color="'white'"
-      :background-color="'rgba(0, 0, 0, 0)'"
-    />
+    <div class="loadingBox">
+      <vue-element-loading
+        :active="loadingActive"
+        :spinner="'line-scale'"
+        :color="'white'"
+        :background-color="'rgba(0, 0, 0, 0)'"
+      />
+    </div>
   </div>
 </template>
 
@@ -63,5 +65,9 @@ export default {
 }
 .loading-spacer {
   height: 30%;
+}
+.loadingBox {
+  width: 100%;
+  height: 100%;
 }
 </style>
