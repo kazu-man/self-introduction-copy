@@ -31,14 +31,16 @@
         </div>
       </div>
     </div>
+    <ReferenceBadgeVue />
   </div>
 </template>
 
 <script>
+import ReferenceBadgeVue from "./ReferenceBadge.vue";
 export default {
   props: ["headerOption"],
   emits: ["clickHeaderOption"],
-
+  components: { ReferenceBadgeVue },
   setup(props, context) {
     const clickHeaderOption = (val) => {
       context.emit("clickHeaderOption", val);
