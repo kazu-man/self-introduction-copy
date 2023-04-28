@@ -5,7 +5,6 @@
 <script>
 import { ref, onMounted } from "vue";
 import * as THREE from "three";
-import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 
 export default {
   setup() {
@@ -18,82 +17,105 @@ export default {
     });
 
     const scene = new THREE.Scene();
-    // const axesHelper = new THREE.AxesHelper(1000);
-    // scene.add(axesHelper);
+
     const camera = new THREE.PerspectiveCamera(
       75,
       window.innerWidth / window.innerHeight,
       0.1,
       2000
     );
-    camera.position.set(50, 50, 50);
-    // camera.lookAt({ x: 0, y: 0, z: 0 });
+    const center = new THREE.Vector3(0, 0, 0);
+    // camera.position.z = 100;
 
     const renderer = new THREE.WebGLRenderer();
     renderer.setSize(window.innerWidth, window.innerHeight);
 
-    const group = new THREE.Group();
-    // グループを作る
-    // 3D空間にグループを追加する
-    scene.add(group);
-    const addMeshToGroup = () => {
-      const material = new THREE.MeshBasicMaterial({ color: "#ffffff" });
-      material.transparent = true;
-      material.opacity = 0.6;
-      const geometry = new THREE.SphereGeometry(1, 30, 30);
-      const mesh = new THREE.Mesh(geometry, material);
-      // 配置座標を計算
-      const xPosition = (Math.random() - 0.5) * 100;
-      const yPosition = (Math.random() - 0.5) * 100;
-      const zPosition = (Math.random() - 0.5) * 100;
-      if (
-        !(
-          Math.abs(xPosition) < 20 &&
-          Math.abs(yPosition) < 20 &&
-          Math.abs(zPosition) < 20
-        )
-      ) {
-        mesh.position.set(xPosition, yPosition, zPosition);
+    const count = 1000;
+    const positionArray = new Float32Array(count * 3);
+    const randomArray = new Float32Array(count * 3);
+    const scaleArray = new Float32Array(count);
 
-        // グループに追加する
-        group.add(mesh);
-      }
-    };
-    const count = 50;
     for (let i = 0; i < count; i++) {
-      // 球体を作成
-      addMeshToGroup();
+      const i3 = i * 3;
+
+      positionArray[i3 + 0] = (Math.random() - 0.5) * 5;
+      positionArray[i3 + 1] = (Math.random() - 0.5) * 5;
+      positionArray[i3 + 2] = (Math.random() - 0.5) * 5;
+
+      randomArray[i3 + 0] = (Math.random() - 0.5) * 5;
+      randomArray[i3 + 1] = (Math.random() - 0.5) * 5;
+      randomArray[i3 + 2] = (Math.random() - 0.5) * 5;
+
+      scaleArray[i] = (Math.random() + 0.5) * 10;
     }
-    let controls = null;
+
+    const geometry = new THREE.BufferGeometry();
+    geometry.setAttribute(
+      "position",
+      new THREE.BufferAttribute(positionArray, 3)
+    );
+    geometry.setAttribute(
+      "aRandomness",
+      new THREE.BufferAttribute(randomArray, 3)
+    );
+    geometry.setAttribute("aScale", new THREE.BufferAttribute(scaleArray, 1));
+    const material = new THREE.ShaderMaterial({
+      vertexShader: `
+      uniform float uTime;
+      attribute vec3 aRandomness;
+      attribute float aScale;
+      void main()
+      {
+          vec4 modelPosition = modelMatrix * vec4(position, 1.0);
+
+          modelPosition.x += sin(position.y * uTime + aScale) * 0.1;
+          modelPosition.z += cos(position.y * uTime + aScale) * 0.1;
+          modelPosition.y += cos(position.z * uTime + aScale) * 0.1;
+
+          modelPosition.xyz += aRandomness;
+          vec4 viewPosition = viewMatrix * modelPosition;
+          vec4 projectedPosition = projectionMatrix * viewPosition;
+          
+          gl_Position = projectedPosition;
+          gl_PointSize = 10.0 * aScale;
+          gl_PointSize *= (1.0 / - viewPosition.z);
+
+      }
+      `,
+      fragmentShader: `
+      void main()
+      {
+        float distanceToCenter = distance(gl_PointCoord, vec2(0.5));
+        float color = 0.05 / distanceToCenter - 0.1;
+        gl_FragColor = vec4(1.0, 1.0, 1.0, color);
+      }`,
+      uniforms: {
+        uTime: { value: 0 },
+      },
+      transparent: true,
+      blending: THREE.AdditiveBlending,
+      depthWrite: false,
+    });
+
+    const points = new THREE.Points(geometry, material);
+
+    scene.add(points);
+
     const init = () => {
       container.value.appendChild(renderer.domElement);
-      controls = new OrbitControls(camera, renderer.domElement);
-
-      scene.add(group);
-
-      camera.position.z = 20;
 
       animate();
     };
-    let rot = 0;
-    const timer = setInterval(addMeshToGroup, 2000);
 
+    const clock = new THREE.Clock();
     const animate = () => {
       requestAnimationFrame(animate);
-      // 毎フレーム角度を足していく
-      rot += 1;
 
-      // // ラジアンに変換する
-      const radian = (rot * Math.PI) / 180;
-      if (group.children.length > 100) {
-        clearInterval(timer);
-      }
-
-      controls.update();
-      // // 角度に応じてカメラの位置を設定
-      camera.position.x = 50 * Math.sin(radian);
-      camera.position.y = 50 * Math.sin(radian);
-      camera.position.z = -50 * Math.cos(radian);
+      material.uniforms.uTime.value = clock.getElapsedTime();
+      camera.position.x = Math.sin(clock.getElapsedTime() * 0.05) * 2;
+      camera.position.z = Math.cos(clock.getElapsedTime() * 0.05) * 2;
+      camera.position.y = 1 - Math.cos(clock.getElapsedTime() * 0.1) * 2;
+      camera.lookAt(center);
 
       renderer.render(scene, camera);
     };
