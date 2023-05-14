@@ -1,24 +1,7 @@
-# self-introduction-copy
+# [self-introduction-copy](https://d1lfpwvow4w05v.cloudfront.net/)
 
-## Project setup
-```
-npm install
-```
+### 使用技術
+JavaScript, Vue3, Three.js, Gsap
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+#### 参考元サイト
+http://manato.ca/
